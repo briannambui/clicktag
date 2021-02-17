@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="/Users/brianbui/Sites/clicktags/in"
+DIR="/Users/brianbui/Sites/clicktag/in"
 
 for file in $DIR/*; do
 
@@ -14,7 +14,7 @@ for file in $DIR/*; do
 	width=${array[0]}
 	height=${array[1]}
 
-	# adsize="<meta name="ad.size" content="width=${width},height=${height}">"
+	sed -i -e "N;s/fnStartAnimation();\n}/fnStartAnimation();/" $file
 
 	sed -i -e "\@<title>@i\\
 	<meta name=\"ad.size\" content=\"width=${width},height=${height}\">
@@ -26,6 +26,7 @@ for file in $DIR/*; do
 	\    name = name.replace(/[\\\\[]/, \"\\\\\\\\[\").replace(/[\\\\]]/, \"\\\\\\\\]\");\\
 	\    var regex = new RegExp(\"[\\\\\\\\?&]\" + name + \"=([^&#]*)\"), results = regex.exec(location.search);\\
 	\     return results === null ? \"\" : decodeURIComponent(results[1].replace(/\\\\+/g, \" \"));\\
+	\}\\
 	\var clickTAG = getParameterByName(\"clickTAG\") + encodeURIComponent(\"\"); 
 	" $file
 
