@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="/Users/brianbui/Sites/clicktags/in"
+DIR="/Users/production/scripts/clicktag/in"
 
 for file in $DIR/*; do
 
