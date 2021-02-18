@@ -1,20 +1,21 @@
 #!/bin/bash
 
-DIR="/Users/production/scripts/clicktag/in"
+DIR="/Users/brianbui/Sites/clicktags/in"
+# DIR="/Users/production/scripts/clicktag/in"
 
 for file in $DIR/*; do
 
 	title=$(echo "cat //html/head/title" |  xmllint --html --shell --nodefdtd $file 2>/dev/null | sed '/^\/ >/d' | sed 's/<[^>]*.//g' | xargs)
 
 	# Dimensions of image
-	first=$(echo $title | grep -o '[0-9][0-9][0-9]')
+	first=$(echo $title | egrep -o '[[:digit:]]+')
+
 	data=$(echo $first | sed 's/ /,/g')
 	IFS=', ' read -r -a array <<< "$data"
 
 	width=${array[0]}
 	height=${array[1]}
-
-	sed -i -e "N;s/fnStartAnimation();\n}/fnStartAnimation();/" $file
+	extra=${array[2]}
 
 	sed -i -e "\@<title>@i\\
 	<meta name=\"ad.size\" content=\"width=${width},height=${height}\">
@@ -38,7 +39,7 @@ for file in $DIR/*; do
 	</a>
 	" $file
 
-	echo "</html>" >> $file
+	sed -i -e 'H;1h;$!d;g;s_\(.*\)}_\1_' $file
 
 done
 
