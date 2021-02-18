@@ -38,8 +38,6 @@ for file in $DIR/*; do
 	</a>
 	" $file
 
-	echo "</html>" >> $file
-
 done
 
 rm -rf $DIR/*.html-e
