@@ -21,13 +21,14 @@ for file in $DIR/*; do
 	" $file
 
 	sed -i -e "/fnStartAnimation();/a\\
-	\}\\
 	\function getParameterByName(name) {\\
-	\    name = name.replace(/[\\\\[]/, \"\\\\\\\\[\").replace(/[\\\\]]/, \"\\\\\\\\]\");\\
-	\    var regex = new RegExp(\"[\\\\\\\\?&]\" + name + \"=([^&#]*)\"), results = regex.exec(location.search);\\
-	\     return results === null ? \"\" : decodeURIComponent(results[1].replace(/\\\\+/g, \" \"));\\
-	\}\\
-	\var clickTAG = getParameterByName(\"clickTAG\") + encodeURIComponent(\"\"); 
+  \    name = name.replace(/[\\\\[]/, \"\"\\\\\\\\[\"\").replace(/[\\\\]]/, \"\"\\\\\\\\]\"\");\\
+  \    var regex = new RegExp(\"\"[\\\\\\\\?&]\"\" + name + \"\"=([^&#]*)\"\"),\\
+  \        results = regex.exec(location.search);\\
+  \    return results === null ? \"\"\"\" :\\
+  \         decodeURIComponent(results[1].replace(/\\\\+/g, \"\" \"\"));\\
+  \}\\
+  \var clickTag = getParameterByName(\"\"clickTag\"\");
 	" $file
 
 	sed -i -e "/<body onload/a\\
