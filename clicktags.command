@@ -21,8 +21,7 @@ for file in $DIR/*; do
 	<meta name=\"ad.size\" content=\"width=${width},height=${height}\">
 	" $file
 
-	sed -i -e "/fnStartAnimation();/a\\
-	\function getParameterByName(name) {\\
+	sed -i -e "\function getParameterByName(name) {\\
   \    name = name.replace(/[\\\\[]/, \"\"\\\\\\\\[\"\").replace(/[\\\\]]/, \"\"\\\\\\\\]\"\");\\
   \    var regex = new RegExp(\"\"[\\\\\\\\?&]\"\" + name + \"\"=([^&#]*)\"\"),\\
   \        results = regex.exec(location.search);\\
