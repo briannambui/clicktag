@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="/Users/brianbui/Sites/clicktags/in"
+DIR="/Users/brianbui/PycharmProjects/clicktag/in"
 
 for file in $DIR/*; do
 
@@ -22,13 +22,13 @@ for file in $DIR/*; do
 
 	sed -i -e "/fnStartAnimation();/a\\
 	\function getParameterByName(name) {\\
-  \    name = name.replace(/[\\\\[]/, \"\"\\\\\\\\[\"\").replace(/[\\\\]]/, \"\"\\\\\\\\]\"\");\\
-  \    var regex = new RegExp(\"\"[\\\\\\\\?&]\"\" + name + \"\"=([^&#]*)\"\"),\\
-  \        results = regex.exec(location.search);\\
-  \    return results === null ? \"\"\"\" :\\
-  \         decodeURIComponent(results[1].replace(/\\\\+/g, \"\" \"\"));\\
+  \  name = name.replace(/[\\\\[]/, \"\\\\\\\\[\").replace(/[\\\\]]/, \"\\\\\\\\]\");\\
+  \  var regex = new RegExp(\"[\\\\\\\\?&]\" + name + \"=([^&#]*)\"),\\
+  \    results = regex.exec(location.search);\\
+  \  return results === null ? \"\" :\\
+  \    decodeURIComponent(results[1].replace(/\\\\+/g, \" \"));\\
   \}\\
-  \var clickTag = getParameterByName(\"\"clickTag\"\");
+  \var clickTag = getParameterByName(\"clickTag\");}
 	" $file
 
 	sed -i -e "/<body onload/a\\

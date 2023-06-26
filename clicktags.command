@@ -21,14 +21,15 @@ for file in $DIR/*; do
 	<meta name=\"ad.size\" content=\"width=${width},height=${height}\">
 	" $file
 
-	sed -i -e "\function getParameterByName(name) {\\
-  \    name = name.replace(/[\\\\[]/, \"\"\\\\\\\\[\"\").replace(/[\\\\]]/, \"\"\\\\\\\\]\"\");\\
-  \    var regex = new RegExp(\"\"[\\\\\\\\?&]\"\" + name + \"\"=([^&#]*)\"\"),\\
-  \        results = regex.exec(location.search);\\
-  \    return results === null ? \"\"\"\" :\\
-  \         decodeURIComponent(results[1].replace(/\\\\+/g, \"\" \"\"));\\
+	sed -i -e "/fnStartAnimation();/a\\
+	\function getParameterByName(name) {\\
+  \  name = name.replace(/[\\\\[]/, \"\\\\\\\\[\").replace(/[\\\\]]/, \"\\\\\\\\]\");\\
+  \  var regex = new RegExp(\"[\\\\\\\\?&]\" + name + \"=([^&#]*)\"),\\
+  \    results = regex.exec(location.search);\\
+  \  return results === null ? \"\" :\\
+  \    decodeURIComponent(results[1].replace(/\\\\+/g, \" \"));\\
   \}\\
-  \var clickTag = getParameterByName(\"\"clickTag\"\");
+  \var clickTag = getParameterByName(\"clickTag\");}
 	" $file
 
 	sed -i -e "/<body onload/a\\
