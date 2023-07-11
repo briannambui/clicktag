@@ -32,7 +32,7 @@ for file in $DIR/*; do
 	" $file
 
 	sed -i -e "/<body onload/a\\
-	<a href=\"javascript:window.open(window.clickTAG);void(0);\">
+	<a href=\"javascript:window.open(window.clickTag);void(0);\">
 	" $file
 
 	sed -i -e "\@</body>@i\\
